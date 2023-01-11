@@ -1,0 +1,40 @@
+CREATE DATABASE projeto;
+
+USE projeto;
+
+CREATE TABLE usuarios (
+cpf varchar(11) PRIMARY KEY,
+nome varchar(80) NOT NULL,
+email varchar(50) NOT NULL,
+telefone varchar (15),
+curriculo varchar(50) DEFAULT 'curriculo.txt',
+senha varchar(15) NOT NULL
+);
+
+CREATE TABLE vaga (
+id int AUTO_INCREMENT PRIMARY KEY,
+nome_empresa varchar(50) NOT NULL,
+area_atuacao varchar(50) NOT NULL,
+descricao_vaga varchar (200)
+);
+
+CREATE TABLE usuario_vaga(
+id int,
+cpf varchar(11),
+
+CONSTRAINT pk_usuario_vaga PRIMARY KEY (id, cpf),
+CONSTRAINT fk_usuario_vaga1 FOREIGN KEY (id) REFERENCES vaga(id) ON DELETE CASCADE,
+CONSTRAINT fk_usuario_vaga2 FOREIGN KEY (cpf) REFERENCES usuarios(cpf) ON DELETE CASCADE
+)
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+INSERT INTO vaga(nome_empresa, area_atuacao, descricao_vaga) 
+VALUES ('Google', 'Engenheiro de Software', 'Responsável por projetar e guiar o desenvolvimento de sistemas, aplicativos e programas.'), ('Farmácia ABC', 'Caixa', 'Atender clientes e receber pagamentos.'), ('DEV INFO', 'Analista de Dados', 'Interpretar dados, analisar resultados e confeccionar relatórios.');
+
+
+INSERT INTO usuarios(cpf, nome, email, telefone, senha)
+VALUES ('12345678901', 'Lucas da Silva', 'lucas@gmail.com', '53999999999', '123456'), 
+('1111111111', 'Joao da Silva', 'joao@gmail.com	', '5384154262', '123456'), ('admin', 'admin', 'admin', 'admin', 'admin');
